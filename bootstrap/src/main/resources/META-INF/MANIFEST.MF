@@ -1,0 +1,9 @@
+Premain-Class: com.devexperts.drd.bootstrap.DRDAgentBootstrap
+Boot-Class-Path: drd_agent.jar
+Can-Retransform-Classes: true
+Class-Path: config/
+
+Name: com/devexperts/drd/bootstrap/
+Implementation-Title: DRD
+Implementation-Version: ${project.version}.${build.info}
+Implementation-Vendor: Devexperts LLC

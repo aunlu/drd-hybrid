@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+  ~ DRD - Dynamic Data Race Detector for Java programs
+  ~
+  ~ Copyright (C) 2002-2018 Devexperts LLC
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="DRDConfig">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="InstrumentationScope" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="Contracts" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="TraceTracking" maxOccurs="1" minOccurs="0"/>
+            </xs:sequence>
+            <!--<xs:attribute name="duplicateRaces" use="optional" type="xs:string"/>-->
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="InstrumentationScope">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="SyncInterception" maxOccurs="1" minOccurs="1"/>
+                <xs:element ref="RaceDetection" maxOccurs="1" minOccurs="1"/>
+                <xs:element ref="SkipOurFields" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="SkipForeignCalls" maxOccurs="1" minOccurs="0"/>
+            </xs:sequence>
+            <!--            <xs:attribute name="include" use="optional" type="xs:string"/>
+         <xs:attribute name="exclude" use="optional" type="xs:string"/>-->
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SyncInterception">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Rule" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="defaultPolicy" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:enumeration value="include"/>
+                        <xs:enumeration value="exclude"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="RaceDetection">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Rule" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="defaultPolicy" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:enumeration value="include"/>
+                        <xs:enumeration value="exclude"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Contracts">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Contract" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Contract">
+        <xs:complexType>
+            <xs:attribute name="clazz" type="xs:string" use="required"/>
+            <xs:attribute name="read" type="xs:string" use="optional"/>
+            <xs:attribute name="write" type="xs:string" use="optional"/>
+            <xs:attribute name="detectRaces" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:enumeration value="all"/>
+                        <xs:enumeration value="write_write_only"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SkipOurFields">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Target" maxOccurs="unbounded" minOccurs="0"/>
+                <!--
+                                <xs:element ref="FieldTarget" maxOccurs="unbounded" minOccurs="0"/>
+                                <xs:element ref="MethodTarget" maxOccurs="unbounded" minOccurs="0"/>
+                -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SkipForeignCalls">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Target" maxOccurs="unbounded" minOccurs="0"/>
+                <!--
+                                <xs:element ref="FieldTarget" maxOccurs="unbounded" minOccurs="0"/>
+                                <xs:element ref="MethodTarget" maxOccurs="unbounded" minOccurs="0"/>
+                -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="TraceTracking">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Target" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Target">
+        <xs:complexType>
+            <xs:attribute name="clazz" type="xs:string" use="required"/>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <!--            <xs:attribute name="type" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:enumeration value="field"/>
+                        <xs:enumeration value="method"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>-->
+            <xs:attribute name="traceDataOperations" type="xs:boolean" use="optional" default="false"/>
+            <xs:attribute name="traceSyncOperations" type="xs:boolean" use="optional" default="false"/>
+            <xs:attribute name="storeThreadAccesses" type="xs:boolean" use="optional" default="false"/>
+            <xs:attribute name="printAccessStackTrace" type="xs:boolean" use="optional" default="false"/>
+            <xs:attribute name="caller" type="xs:string" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!--
+        <xs:element name="FieldTarget">
+            <xs:complexType>
+                <xs:attribute name="class" type="xs:string" use="required"/>
+                <xs:attribute name="name" type="xs:string" use="required"/>
+                <xs:attribute name="traceDataOperations" type="xs:boolean" use="optional" default="false"/>
+                <xs:attribute name="traceSyncOperations" type="xs:boolean" use="optional" default="false"/>
+                <xs:attribute name="storeThreadAccesses" type="xs:boolean" use="optional" default="false"/>
+                <xs:attribute name="printAccessStackTrace" type="xs:boolean" use="optional" default="false"/>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="MethodTarget">
+            <xs:complexType>
+                <xs:attribute name="class" type="xs:string" use="required"/>
+                <xs:attribute name="name" type="xs:string" use="required"/>
+                <xs:attribute name="traceDataOperations" type="xs:boolean" use="optional" default="false"/>
+                <xs:attribute name="traceSyncOperations" type="xs:boolean" use="optional" default="false"/>
+                <xs:attribute name="storeThreadAccesses" type="xs:boolean" use="optional" default="false"/>
+                <xs:attribute name="printAccessStackTrace" type="xs:boolean" use="optional" default="false"/>
+            </xs:complexType>
+        </xs:element>
+    -->
+
+    <xs:element name="Rule">
+        <xs:complexType>
+            <xs:attribute name="path" type="xs:string" use="required"/>
+            <xs:attribute name="type" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:enumeration value="include"/>
+                        <xs:enumeration value="exclude"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

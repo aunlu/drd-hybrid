@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ DRD - Dynamic Data Race Detector for Java programs
+  ~
+  ~ Copyright (C) 2002-2018 Devexperts LLC
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>auto-testing</artifactId>
+  <description>Auto-testing that runs on integration-test phase and check DRD correctness on model examples
+  </description>
+  <parent>
+    <artifactId>drd</artifactId>
+    <groupId>com.devexperts.drd</groupId>
+    <version>0.7.2</version>
+  </parent>
+  <name>DRD Auto-Testing</name>
+  
+  <dependencies>
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <version>1.4.8</version>
+    </dependency>
+    <dependency>
+      <groupId>com.devexperts.drd</groupId>
+      <artifactId>transformer</artifactId>
+      <version>0.7.2</version>
+    </dependency>
+    <dependency>
+      <groupId>com.devexperts.drd</groupId>
+      <artifactId>drd-race</artifactId>
+      <version>0.7.2</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.4.0</version>
+        <executions>
+          <execution>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <mainClass>com.devexperts.drd.autotesting.AutoTesting</mainClass>
+              <!--<systemProperties>-->
+                <!--<systemProperty>-->
+                  <!--<key>drd.auto.testing.include</key>-->
+                  <!--<value>guaranteed_dr,possible_dr,chm_no_dr</value>-->
+                <!--</systemProperty>-->
+              <!--</systemProperties>-->
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

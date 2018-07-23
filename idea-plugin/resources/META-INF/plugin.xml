@@ -1,0 +1,39 @@
+<!--
+  ~ DRD - Dynamic Data Race Detector for Java programs
+  ~
+  ~ Copyright (C) 2002-2018 Devexperts LLC
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<idea-plugin version="1">
+  <id>com.devexperts.drd.plugin</id>
+  <name>Dynamic DRD Table</name>
+  <version>0.7</version>
+  <vendor url="http://www.devexperts.com">DevExperts</vendor>
+
+  <description><![CDATA[
+    Plugin runs a table, which shows data races from file in real time.
+  ]]></description>
+
+  <idea-version since-build="141.0"/>
+  <extensions defaultExtensionNs="com.intellij" />
+
+  <actions>
+    <action id="TableStart" class="com.devexperts.drd.plugin.TableStart" text="TableStart">
+      <keyboard-shortcut keymap="$default" first-keystroke="alt shift D"/>
+    </action>
+  </actions>
+
+</idea-plugin>

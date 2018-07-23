@@ -1,0 +1,1 @@
+start javaw -jar bin/drd-gui-${project.version}.jar

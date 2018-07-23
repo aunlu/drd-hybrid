@@ -1,0 +1,21 @@
+Online instrumentation
+
+1). Launch ant task "agent". It would generate deliverables in ./out/DRD/agent/ dir:
+    - Java agent .jar-file: drd_agent.jar
+    - Libs, used by agent: directory named "lib"
+
+Further this dir ("./out/DRD/agent/") would be referred as "<AGENT_DIR>"
+
+2). Launch your application using drd java agent:
+java -javaagent:"<AGENT_DIR>\drd_agent.jar" <...>
+
+java -javaagent:"D:\Work\Projects\DRD\out\DRD\agent\drd_agent.jar" -Ddrd.settings.file="D:\JTT_DRD\drd.properties" -jar target\jtt-1.0-SNAPSHOT-client\bin\jtt-tracker-gui-1.0-SNAPSHOT.jar
+
+Offline instrumentation
+DEPRECATED - use online instrumentation!!
+
+Input: jar-file X.jar
+1). Launch instrumentor. Input - path to jar; output - dir where instrumented files would be. Let it be "GENOUT"
+2). Copy builded vector_clock module (.class-files there, not .java files) to GENOUT
+3). Make X_instr.jar: %JAVA_HOME%\bin\jar.exe cfm "<result_dir>\X_instr.jar" GENOUT\META-INF\MANIFEST.MF -C GENOUT .
+4). launch: java -jar "<result_dir>\X_instr.jar"

@@ -1,0 +1,6 @@
+1. mvn package
+2. Files -> Settings -> Plugins -> Install plugin from disk...
+3. Choose plugin-0.7-SNAPSHOT
+4. Automaticly reload Idea
+5. Press Alt + Shift + D
+5. Press "+" and select file. Open operation might take up to 20-30 seconds.

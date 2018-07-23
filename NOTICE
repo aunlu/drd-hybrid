@@ -1,0 +1,49 @@
+
+DRD - Dynamic Data Race Detector for Java programs
+
+Copyright (C) 2002-2018 Devexperts LLC
+
+This product is developed at Devexperts LLC (http://devexperts.com/).
+Licensed under the GNU General Public License, Version 3.
+Full text of the licence can be found in the COPYING file.
+Source code and documentation are available at <http://code.devexperts.com/>.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+
+*** Included Software ***
+
+Sources of this product includes following thirdparty code:
+----
+
+Some classes from QDS library developed at Devexperts LLC (http://devexperts.com/).
+Copyright (C) 2002-2012 Devexperts LLC
+The library is licensed under the Mozilla Public License, Version 2.0.
+
+Implementation of non-blocking hash-table written by Cliff Click and released to the public domain,
+as explained at http://creativecommons.org/licenses/publicdomain
+
+Implementation of ConcurrentWeakHashMap written by Doug Lea  with assistance from members of JCP JSR-166 Expert Group
+and released to the public domain, as explained at http://creativecommons.org/licenses/publicdomain
+
+Distribution package of the product includes following thirdparty libraries:
+----
+
+(BSD style) XStream Core (com.thoughtworks.xstream:xstream:1.4.8 - http://codehaus.org/xstream-parent/xstream/)
+(BSD) ASM Debug All (org.ow2.asm:asm-debug-all:5.0.4 - http://asm.objectweb.org/asm-debug-all/)
+(Public Domain) XML Pull Parsing API (xmlpull:xmlpull:1.1.3.1 - http://www.xmlpull.org)
+(Public Domain) MXP1: Xml Pull Parser 3rd Edition (XPP3) (xpp3:xpp3_min:1.1.4c - http://www.extreme.indiana.edu/xgws/xsoap/xpp/mxp1/)
+
+
+
